@@ -143,6 +143,7 @@ class Game {
 
           this.handleFuel(index);
           this.handlePowerCoins(index);
+          this.handleObstacleCollision(index);
 
           camera.position.x = cars[index -1].position.x;
           camera.position.y = cars[index -1].position.y;
@@ -270,6 +271,19 @@ class Game {
       //el evento
       collected.remove();
     });
+  }
+
+  handleObstacleCollision(index) {
+    if (cars[index - 1].collide(obstacles)) {
+      
+  
+      //Reduciendo la vida del jugador
+      if (player.life > 0) {
+        player.life -= 185 / 4;
+      }
+  
+      player.update();
+    }
   }
 
   showRank() {
